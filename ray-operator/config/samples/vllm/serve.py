@@ -115,7 +115,7 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
     
     tp = engine_args.tensor_parallel_size
     pg_resources = []
-    pg_resources.append({"CPU": 1})
+    pg_resources.append({"CPU": 1，"GPU": 1})
     for i in range(tp):
         pg_resources.append({"CPU": 1, "GPU": 1})
 
