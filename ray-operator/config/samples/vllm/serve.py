@@ -112,8 +112,14 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
     parsed_args = parse_vllm_args(cli_args)
     engine_args = AsyncEngineArgs.from_cli_args(parsed_args)
     engine_args.worker_use_ray = True
+    pg_resources = []
+    pg_resources.append({"CPU": 1})
+    for i in range(tp):
+        pg_resources.append({"CPU": 1, "GPU": 1})
 
-    return VLLMDeployment.bind(
+    return VLLMDeployment.options(  
+        placement_group_bundles=pg_resources, placement_group_strategy="STRICT_SPREAD"
+    ).bind(
         engine_args,
         parsed_args.response_role,
         parsed_args.lora_modules,
