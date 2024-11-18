@@ -118,7 +118,7 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
         #pg_resources.append({"CPU": 1, "GPU": 1})
     
     #placement_group_bundles=pg_resources, placement_group_strategy="STRICT_SPREAD"
-    return VLLMDeployment.options().bind(
+    return VLLMDeployment.options(max_replicas_per_node=1).bind(
         engine_args,
         parsed_args.response_role,
         parsed_args.lora_modules,
