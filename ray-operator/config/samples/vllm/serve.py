@@ -112,14 +112,10 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
     parsed_args = parse_vllm_args(cli_args)
     engine_args = AsyncEngineArgs.from_cli_args(parsed_args)
     engine_args.worker_use_ray = True
+
+    #placement_group_bundles=bundles, placement_group_strategy="SPREAD"
     
-    #pg_resources = [{"CPU": 1, "GPU": 4}]
-    #for i in range(3):
-        #pg_resources.append({"CPU": 1, "GPU": 1},{"GPU":1},{"GPU":1})
-    
-    #placement_group_bundles=pg_resources, placement_group_strategy="SPREAD"
-    
-    return VLLMDeployment.options().bind(
+    return VLLMDeployment.options(max_replicas_per_node=1).bind(
         engine_args,
         parsed_args.response_role,
         parsed_args.lora_modules,
@@ -128,4 +124,4 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
 
 
 model = build_app(
-    {"model": os.environ['MODEL_ID'], "tensor-parallel-size": os.environ['TENSOR_PARALLELISM'], "pipeline-parallel-size": os.environ['PIPELINE_PARALLELISM'],"swap-space": os.environ['SWAP_SPACE']})
+    {"model": os.environ['MODEL_ID'], "tensor-parallel-size": os.environ['TENSOR_PARALLELISM'], "pipeline-parallel-size": os.environ['PIPELINE_PARALLELISM'],"swap-space": os.environ['SWAP_SPACE'],"distributed_executor_backend": os.environ['distributed_executor_backend']})
