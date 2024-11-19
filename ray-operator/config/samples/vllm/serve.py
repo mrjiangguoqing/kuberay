@@ -26,7 +26,7 @@ logger = logging.getLogger("ray.serve")
 app = FastAPI()
 
 
-os.environ['GLOO_SOCKET_IFNAME'] = 'enp1s0'
+os.environ['GLOO_SOCKET_IFNAME'] = 'enp9s0'
 
 
 @serve.deployment(name="VLLMDeployment")
