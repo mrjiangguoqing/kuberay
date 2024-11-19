@@ -35,8 +35,10 @@ class VLLMDeployment:
         response_role: str,
         lora_modules: Optional[List[LoRAModulePath]] = None,
         chat_template: Optional[str] = None,
-        logger.setLevel(logging.DEBUG),
+
     ):
+        
+        logger.setLevel(logging.DEBUG)
         logger.info(f"Starting with engine args: {engine_args}")
         self.openai_serving_chat = None
         self.engine_args = engine_args
