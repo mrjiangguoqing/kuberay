@@ -113,7 +113,7 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
     engine_args = AsyncEngineArgs.from_cli_args(parsed_args)
     engine_args.worker_use_ray = True
 
-    #placement_group_bundles=bundles, placement_group_strategy="SPREAD"
+    #placement_group_bundles=bundles, placement_group_strategy="PACK"
 
     bundles=[{"CPU": 1, "GPU": 1}]
     
