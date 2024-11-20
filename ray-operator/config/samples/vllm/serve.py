@@ -26,8 +26,8 @@ logger = logging.getLogger("ray.serve")
 app = FastAPI()
 
 
-os.environ['TP_SOCKET_IFNAME'] = 'eth0'
-os.environ['GLOO_SOCKET_IFNAME'] = 'eth0'
+#os.environ['TP_SOCKET_IFNAME'] = 'eth0'
+#os.environ['GLOO_SOCKET_IFNAME'] = 'eth0'
 os.environ['VLLM_LOGGING_LEVEL'] = 'DEBUG'
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 os.environ['NCCL_DEBUG'] = 'TRACE'
