@@ -27,6 +27,10 @@ app = FastAPI()
 
 
 os.environ['GLOO_SOCKET_IFNAME'] = 'enp9s0'
+os.environ['VLLM_LOGGING_LEVEL=DEBUG'] = 'DEBUG"
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+os.environ['NCCL_DEBUG'] = 'TRACE'
+os.environ['VLLM_TRACE_FUNCTION'] = '1'    
 
 
 @serve.deployment(name="VLLMDeployment")
