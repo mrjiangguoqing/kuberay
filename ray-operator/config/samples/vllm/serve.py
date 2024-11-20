@@ -32,6 +32,7 @@ os.environ['VLLM_LOGGING_LEVEL'] = 'DEBUG'
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 os.environ['NCCL_DEBUG'] = 'TRACE'
 os.environ['VLLM_TRACE_FUNCTION'] = '1'    
+os.environ['NCCL_IB_DISABLEN'] = '1'    
 
 
 @serve.deployment(name="VLLMDeployment")
