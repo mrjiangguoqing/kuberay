@@ -18,7 +18,7 @@ from vllm.entrypoints.openai.protocol import (
     ErrorResponse,
 )
 from vllm.entrypoints.openai.serving_chat import OpenAIServingChat
-from vllm.entrypoints.openai.serving_engine import LoRAModulePath
+from vllm.entrypoints.openai.serving_models import LoRAModulePath
 from vllm.utils import FlexibleArgumentParser
 
 logger = logging.getLogger("ray.serve")
