@@ -20,6 +20,7 @@ from vllm.entrypoints.openai.protocol import (
 from vllm.entrypoints.openai.serving_chat import OpenAIServingChat
 from vllm.entrypoints.openai.serving_models import LoRAModulePath
 from vllm.utils import FlexibleArgumentParser
+from vllm.entrypoints.openai.serving_models import OpenAIServingModels 
 
 logger = logging.getLogger("ray.serve")
 
@@ -52,7 +53,7 @@ class VLLMDeployment:
         self.openai_serving_chat = None
         self.engine_args = engine_args
         self.response_role = response_role
-        self.lora_modules = lora_modules
+        #self.lora_modules = lora_modules
         self.chat_template = chat_template
         self.engine = AsyncLLMEngine.from_engine_args(engine_args)
 
@@ -72,15 +73,25 @@ class VLLMDeployment:
                 #served_model_names = self.engine_args.served_model_name
             #else:
                 #served_model_names = [self.engine_args.model]
-            self.openai_serving_chat = OpenAIServingChat(
+                models = OpenAIServingModels(
+                engine_client=self.engine,
+                model_config=model_config,
+                base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path=MODEL_NAME)],
+                lora_modules=lora_modules,
+                prompt_adapters=prompt_adapters
+                )
+                self.openai_serving_chat = OpenAIServingChat(
                 self.engine,
                 model_config,
+                models,
                 #served_model_names=served_model_names,
+                chat_template_content_format="auto",
+                #enable_reasoning: bool = False,
                 response_role=self.response_role,
                 #lora_modules=self.lora_modules,
                 chat_template=self.chat_template,
-                prompt_adapters=None,
-                request_logger=None,
+                #prompt_adapters=None,
+                #request_logger=None,
             )
         logger.info(f"Request: {request}")
         generator = await self.openai_serving_chat.create_chat_completion(
@@ -133,8 +144,9 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
     return VLLMDeployment.options(placement_group_bundles=bundles, placement_group_strategy="STRICT_SPREAD").bind(
         engine_args,
         parsed_args.response_role,
-        parsed_args.lora_modules,
+        #parsed_args.lora_modules,
         parsed_args.chat_template,
+        parsed_args.model
     )
 
 
