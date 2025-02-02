@@ -45,7 +45,7 @@ class VLLMDeployment:
         response_role: str,
         #lora_modules: Optional[List[LoRAModulePath]] = None,
         chat_template: Optional[str] = None,
-
+        model: ,
     ):
         
         logger.setLevel(logging.DEBUG)
@@ -76,7 +76,7 @@ class VLLMDeployment:
                 models = OpenAIServingModels(
                 engine_client=self.engine,
                 model_config=model_config,
-                base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path=MODEL_NAME)],
+                base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")],
                 lora_modules=lora_modules,
                 prompt_adapters=prompt_adapters
                 )
@@ -146,7 +146,7 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
         parsed_args.response_role,
         #parsed_args.lora_modules,
         parsed_args.chat_template,
-        parsed_args.model
+        #parsed_args.model
     )
 
 
