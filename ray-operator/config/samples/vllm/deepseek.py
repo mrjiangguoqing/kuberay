@@ -77,7 +77,7 @@ class VLLMDeployment:
                 model_config,
                 #served_model_names=served_model_names,
                 response_role=self.response_role,
-                lora_modules=self.lora_modules,
+                #lora_modules=self.lora_modules,
                 chat_template=self.chat_template,
                 prompt_adapters=None,
                 request_logger=None,
@@ -139,4 +139,4 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
 
 
 model = build_app(
-    {"model": os.environ['MODEL_ID'], "tensor-parallel-size": os.environ['TENSOR_PARALLELISM'], "pipeline-parallel-size": os.environ['PIPELINE_PARALLELISM'],"swap-space": os.environ['SWAP_SPACE'],"distributed_executor_backend": os.environ['distributed_executor_backend'],"gpu-memory-utilization": os.environ['gpu-memory-utilization']})
+    {"model": os.environ['MODEL_ID'], "tensor-parallel-size": os.environ['TENSOR_PARALLELISM'], "pipeline-parallel-size": os.environ['PIPELINE_PARALLELISM'],"swap-space": os.environ['SWAP_SPACE'],"distributed_executor_backend": os.environ['distributed_executor_backend'],"download-dir": os.environ['download-dir']})
