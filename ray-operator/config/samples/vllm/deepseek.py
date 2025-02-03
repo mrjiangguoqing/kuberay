@@ -68,18 +68,16 @@ class VLLMDeployment:
         """
         if not self.openai_serving_chat:
             model_config = await self.engine.get_model_config()
+            models = OpenAIServingModels(
+                engine_client=self.engine,
+                model_config=model_config,
+                base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")],
+            )
             # Determine the name of the served model for the OpenAI client.
             #if self.engine_args.served_model_name is not None:
                 #served_model_names = self.engine_args.served_model_name
             #else:
                 #served_model_names = [self.engine_args.model]
-                models = OpenAIServingModels(
-                engine_client=self.engine,
-                model_config=model_config,
-                base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")],
-                lora_modules=lora_modules,
-                prompt_adapters=prompt_adapters
-                )
                 self.openai_serving_chat = OpenAIServingChat(
                 self.engine,
                 model_config,
