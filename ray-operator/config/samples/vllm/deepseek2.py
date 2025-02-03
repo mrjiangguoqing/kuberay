@@ -22,6 +22,13 @@ from vllm.entrypoints.openai.serving_models import LoRAModulePath
 from vllm.utils import FlexibleArgumentParser
 from vllm.entrypoints.openai.serving_models import OpenAIServingModels 
 
+from dataclasses import dataclass
+
+@dataclass
+class BaseModelPath:
+    name: str
+    model_path: str
+
 logger = logging.getLogger("ray.serve")
 
 app = FastAPI()
