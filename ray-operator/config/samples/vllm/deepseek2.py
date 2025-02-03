@@ -43,7 +43,7 @@ class VLLMDeployment:
         self,
         engine_args: AsyncEngineArgs,
         response_role: str,
-        model: str,
+        #model: str,
         # lora_modules: Optional[List[LoRAModulePath]] = None,
         chat_template: Optional[str] = None,
     ):
