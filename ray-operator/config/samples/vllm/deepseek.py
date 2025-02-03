@@ -45,7 +45,7 @@ class VLLMDeployment:
         response_role: str,
         #lora_modules: Optional[List[LoRAModulePath]] = None,
         chat_template: Optional[str] = None,
-        model: ,
+        model: str,
     ):
         
         logger.setLevel(logging.DEBUG)
