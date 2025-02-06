@@ -157,6 +157,6 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
         #parsed_args.model
     )
 
-
+#"model": os.environ['MODEL_ID'],
 model = build_app(
-    {"model": os.environ['MODEL_ID'], "tensor-parallel-size": os.environ['TENSOR_PARALLELISM'], "pipeline-parallel-size": os.environ['PIPELINE_PARALLELISM'],"swap-space": os.environ['SWAP_SPACE'],"distributed_executor_backend": os.environ['distributed_executor_backend'],"download-dir": os.environ['download-dir'],"max_num_batched_tokens": os.environ['max_num_batched_tokens'],"max_num_seqs": os.environ['max_num_seqs'],"kv-cache-dtype": os.environ['kv-cache-dtype'],"cpu-offload-gb": os.environ['cpu-offload-gb']})
+    {"tensor-parallel-size": os.environ['TENSOR_PARALLELISM'], "pipeline-parallel-size": os.environ['PIPELINE_PARALLELISM'],"swap-space": os.environ['SWAP_SPACE'],"distributed_executor_backend": os.environ['distributed_executor_backend'],"download-dir": os.environ['download-dir'],"max_num_batched_tokens": os.environ['max_num_batched_tokens'],"max_num_seqs": os.environ['max_num_seqs'],"kv-cache-dtype": os.environ['kv-cache-dtype'],"cpu-offload-gb": os.environ['cpu-offload-gb']})
