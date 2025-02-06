@@ -77,7 +77,7 @@ class VLLMDeployment:
             models = OpenAIServingModels(
                 engine_client=self.engine,
                 model_config=model_config,
-                base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")],
+                base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="/data/model_data/models--DeepSeek-R1-Distill-Qwen-1.5B")],
             )
 
             # Determine the name of the served model for the OpenAI client.
