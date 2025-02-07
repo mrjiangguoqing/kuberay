@@ -146,8 +146,8 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
 
     #placement_group_bundles=bundles, placement_group_strategy="PACK"
 
-    bundles=[{"CPU":7,"GPU": 1},{"CPU":7,"GPU": 1}]
-    #bundles=[{"CPU":7,"GPU": 1}]
+    #bundles=[{"CPU":7,"GPU": 1},{"CPU":7,"GPU": 1}]
+    bundles=[{"CPU":7,"GPU": 1}]
     
     return VLLMDeployment.options(placement_group_bundles=bundles, placement_group_strategy="STRICT_SPREAD").bind(
         engine_args,
