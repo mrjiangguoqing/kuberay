@@ -93,13 +93,13 @@ class VLLMDeployment:
                 base_model_paths,
                 #models,
                 # served_model_names=served_model_names,
-                chat_template_content_format="auto",
+                #chat_template_content_format="auto",
                 # enable_reasoning: bool = False,
                 response_role=self.response_role,
                 # lora_modules=self.lora_modules,
                 chat_template=self.chat_template,
                 #prompt_adapters=None,
-                request_logger=None,
+                #request_logger=None,
             )
         
         logger.info(f"Request: {request}")
