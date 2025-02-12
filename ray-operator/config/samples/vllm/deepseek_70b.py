@@ -20,7 +20,7 @@ from vllm.entrypoints.openai.protocol import (
 from vllm.entrypoints.openai.serving_chat import OpenAIServingChat
 #from vllm.entrypoints.openai.serving_models import LoRAModulePath
 from vllm.utils import FlexibleArgumentParser
-from vllm.entrypoints.openai.serving_models import OpenAIServingModels 
+#from vllm.entrypoints.openai.serving_models import OpenAIServingModels 
 
 from dataclasses import dataclass
 
@@ -74,11 +74,12 @@ class VLLMDeployment:
         """
         if not self.openai_serving_chat:
             model_config = await self.engine.get_model_config()
-            models = OpenAIServingModels(
-                engine_client=self.engine,
-                model_config=model_config,
-                base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="/data/model_data/models--DeepSeek-R1-Distill-Qwen-1.5B")],
-            )
+            base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="/data/model_data/models--DeepSeek-R1-Distill-Qwen-1.5B")],
+            #models = OpenAIServingModels(
+            #    engine_client=self.engine,
+            #    model_config=model_config,
+            #    base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="/data/model_data/models--DeepSeek-R1-Distill-Qwen-1.5B")],
+            #)
 
             # Determine the name of the served model for the OpenAI client.
             # if self.engine_args.served_model_name is not None:
@@ -89,7 +90,8 @@ class VLLMDeployment:
             self.openai_serving_chat = OpenAIServingChat(
                 self.engine,
                 model_config,
-                models,
+                base_model_paths,
+                #models,
                 # served_model_names=served_model_names,
                 chat_template_content_format="auto",
                 # enable_reasoning: bool = False,
