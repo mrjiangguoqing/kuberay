@@ -24,10 +24,14 @@ from vllm.utils import FlexibleArgumentParser
 
 from dataclasses import dataclass
 
+
+
 @dataclass
 class BaseModelPath:
     name: str
     model_path: str
+
+BASE_MODEL_PATHS = [BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")]
 
 logger = logging.getLogger("ray.serve")
 
@@ -74,7 +78,7 @@ class VLLMDeployment:
         """
         if not self.openai_serving_chat:
             model_config = await self.engine.get_model_config()
-            base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="/data/model_data/models--DeepSeek-R1-Distill-Qwen-1.5B")],
+            base_model_paths=BASE_MODEL_PATHS,
             #models = OpenAIServingModels(
             #    engine_client=self.engine,
             #    model_config=model_config,
