@@ -100,6 +100,9 @@ class VLLMDeployment:
                 chat_template=self.chat_template,
                 #prompt_adapters=None,
                 #request_logger=None,
+                lora_modules=None,          # 显式传递 None
+                prompt_adapters=None,       # 显式传递 None
+                request_logger=None,  
             )
         
         logger.info(f"Request: {request}")
