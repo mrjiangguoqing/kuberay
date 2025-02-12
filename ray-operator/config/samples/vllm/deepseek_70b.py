@@ -78,7 +78,6 @@ class VLLMDeployment:
         """
         if not self.openai_serving_chat:
             model_config = await self.engine.get_model_config()
-            base_model_paths=BASE_MODEL_PATHS,
             #models = OpenAIServingModels(
             #    engine_client=self.engine,
             #    model_config=model_config,
@@ -94,7 +93,7 @@ class VLLMDeployment:
             self.openai_serving_chat = OpenAIServingChat(
                 self.engine,
                 model_config,
-                base_model_paths,
+                BASE_MODEL_PATHS,
                 #models,
                 # served_model_names=served_model_names,
                 #chat_template_content_format="auto",
