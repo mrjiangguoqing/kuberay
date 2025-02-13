@@ -154,7 +154,7 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
 
     #placement_group_bundles=bundles, placement_group_strategy="PACK"
 
-    bundles=[{"CPU":30,"GPU": 2},{"CPU":30,"GPU": 2}]
+    bundles=[{"CPU":30,"GPU": 1},{"CPU":30,"GPU": 1}]
     #bundles=[{"CPU":7,"GPU": 1},{"CPU":7,"GPU": 1}]
     #bundles=[{"CPU":7,"GPU": 1}]
     
