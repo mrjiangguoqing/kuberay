@@ -155,7 +155,7 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
     #placement_group_bundles=bundles, placement_group_strategy="PACK"
 
     #bundles=[{"CPU":8,"GPU": 1},{"CPU":7,"GPU": 1},{"CPU":0,"GPU": 1},{"CPU":0,"GPU": 1}]
-    bundles=[{"CPU":7,"GPU": 1},{"CPU":7,"GPU": 1}]
+    bundles=[{"CPU":7,"GPU": 2},{"CPU":7,"GPU": 2}]
     #bundles=[{"CPU":7,"GPU": 1}]
     
     return VLLMDeployment.options(placement_group_bundles=bundles, placement_group_strategy="STRICT_SPREAD").bind(
@@ -168,4 +168,4 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
 
 #"model": os.environ['MODEL_ID'],"cpu-offload-gb": os.environ['cpu-offload-gb']
 model = build_app(
-    {"model": os.environ['MODEL_ID'],"tensor-parallel-size": os.environ['TENSOR_PARALLELISM'], "pipeline-parallel-size": os.environ['PIPELINE_PARALLELISM'],"swap-space": os.environ['SWAP_SPACE'],"distributed_executor_backend": os.environ['distributed_executor_backend'],"dtype": os.environ['dtype'],"cpu-offload-gb": os.environ['cpu-offload-gb'],"download-dir": os.environ['download-dir'],"max_num_batched_tokens": os.environ['max_num_batched_tokens'],"max_num_seqs": os.environ['max_num_seqs'],"kv-cache-dtype": os.environ['kv-cache-dtype'],"enable_chunked_prefill": os.environ['enable_chunked_prefill']})
+    {"model": os.environ['MODEL_ID'],"tensor-parallel-size": os.environ['TENSOR_PARALLELISM'], "pipeline-parallel-size": os.environ['PIPELINE_PARALLELISM'],"swap-space": os.environ['SWAP_SPACE'],"distributed_executor_backend": os.environ['distributed_executor_backend'],"dtype": os.environ['dtype'],"cpu-offload-gb": os.environ['cpu-offload-gb'],"download-dir": os.environ['download-dir'],"max_num_batched_tokens": os.environ['max_num_batched_tokens'],"max_num_seqs": os.environ['max_num_seqs'],"kv-cache-dtype": os.environ['kv-cache-dtype'],"enable_chunked_prefill": os.environ['enable_chunked_prefill'],"worker-use-ray": os.environ['worker-use-ray']})
