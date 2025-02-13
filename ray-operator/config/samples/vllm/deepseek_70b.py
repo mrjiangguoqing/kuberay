@@ -31,7 +31,7 @@ class BaseModelPath:
     name: str
     model_path: str
 
-BASE_MODEL_PATHS = [BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")]
+BASE_MODEL_PATHS = [BaseModelPath(name="/data/model_data/models--DeepSeek-R1-Distill-Qwen-1.5B", model_path="/data/model_data/models--DeepSeek-R1-Distill-Qwen-1.5B")]
 
 logger = logging.getLogger("ray.serve")
 
