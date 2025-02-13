@@ -24,10 +24,14 @@ from vllm.utils import FlexibleArgumentParser
 
 from dataclasses import dataclass
 
+
+
 @dataclass
 class BaseModelPath:
     name: str
     model_path: str
+
+BASE_MODEL_PATHS = [BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")]
 
 logger = logging.getLogger("ray.serve")
 
@@ -74,7 +78,6 @@ class VLLMDeployment:
         """
         if not self.openai_serving_chat:
             model_config = await self.engine.get_model_config()
-            base_model_paths=[BaseModelPath(name="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", model_path="/data/model_data/models--DeepSeek-R1-Distill-Qwen-1.5B")],
             #models = OpenAIServingModels(
             #    engine_client=self.engine,
             #    model_config=model_config,
@@ -90,7 +93,7 @@ class VLLMDeployment:
             self.openai_serving_chat = OpenAIServingChat(
                 self.engine,
                 model_config,
-                base_model_paths,
+                BASE_MODEL_PATHS,
                 #models,
                 # served_model_names=served_model_names,
                 #chat_template_content_format="auto",
@@ -100,6 +103,9 @@ class VLLMDeployment:
                 chat_template=self.chat_template,
                 #prompt_adapters=None,
                 #request_logger=None,
+                lora_modules=None,          # 显式传递 None
+                prompt_adapters=None,       # 显式传递 None
+                request_logger=None,  
             )
         
         logger.info(f"Request: {request}")
@@ -148,7 +154,8 @@ def build_app(cli_args: Dict[str, str]) -> serve.Application:
 
     #placement_group_bundles=bundles, placement_group_strategy="PACK"
 
-    bundles=[{"CPU":7,"GPU": 1},{"CPU":7,"GPU": 1}]
+    bundles=[{"CPU":30,"GPU": 1},{"CPU":30,"GPU": 1},{"CPU":30,"GPU": 1},{"CPU":30,"GPU": 1}]
+    #bundles=[{"CPU":7,"GPU": 1},{"CPU":7,"GPU": 1}]
     #bundles=[{"CPU":7,"GPU": 1}]
     
     return VLLMDeployment.options(placement_group_bundles=bundles, placement_group_strategy="STRICT_SPREAD").bind(
